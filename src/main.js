@@ -413,13 +413,8 @@ const mobileInput = {
 
 let activeMapRoot = null;
 let selectedPlayerPath = null;
-await setupWorld();
-syncMapEditorUI();
-tick();
-await setupCharacterSelection();
-await populateActors();
-setGamePhase("idle");
-snapCameraToPlayer();
+
+init();
 
 fightButton.addEventListener("click", () => {
   if (game.phase !== "idle") return;
@@ -497,6 +492,16 @@ renderer.domElement.addEventListener("pointerdown", onPointerDown);
 renderer.domElement.addEventListener("contextmenu", (event) => event.preventDefault());
 
 setupMobileControls();
+
+async function init() {
+  await setupWorld();
+  syncMapEditorUI();
+  tick();
+  await setupCharacterSelection();
+  await populateActors();
+  setGamePhase("idle");
+  snapCameraToPlayer();
+}
 
 async function setupWorld() {
   const hemiLight = new THREE.HemisphereLight("#fffaf1", "#6b7f99", 1.9);
